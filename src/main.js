@@ -9,7 +9,7 @@ import './styles/index.scss'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-
+Vue.config.devtools = false;
 new Vue({
   router,
   store,

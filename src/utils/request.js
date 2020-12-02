@@ -1,12 +1,15 @@
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/common/auth'
+import { getToken } from '@/utils/auth'
 
+/*axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'*/
+/*axios.defaults.headers['Content-Type'] ='application/x-www-form-urlencoded'*/
 
   const instance=axios.create(
     {
       baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+      //baseURL: 'https://localhost:8082',
       // withCredentials: true, // send cookies when cross-domain requests
       timeout: 5000 // request timeout
     }
@@ -84,6 +87,6 @@ instance.interceptors.response.use(
 )
 
 
-return instance(config)
+export default instance
 
 

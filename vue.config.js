@@ -3,7 +3,7 @@ module.exports={
   configureWebpack:{
     resolve:{
       alias:{
-     /*   '@': resolve('src')*/
+        // '@': resolve('src')
       /*  'assets':'@/assets',
         'common':'@/common',
         'components':'@/components',
@@ -11,6 +11,23 @@ module.exports={
         'views':'@/views'*/
       }
     }
-  }
+  },
+   /* devServer: {
+      port: 8100, // 端口号
+    }*/
 
+
+    devServer: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8082',
+          changeOrigin: true,
+          ws: true,
+          pathRewrite: {
+            '^/api': ''
+          }
+        }
+      }
+
+    }
 }
