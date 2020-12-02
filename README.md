@@ -1,4 +1,4 @@
-# ecological-patrol-web
+# vue-web
 
 ## Project setup
 ```
