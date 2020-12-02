@@ -1,33 +1,12 @@
-module.exports={
-  /*别名*/
-  configureWebpack:{
-    resolve:{
-      alias:{
-        // '@': resolve('src')
-      /*  'assets':'@/assets',
-        'common':'@/common',
-        'components':'@/components',
-        'network':'@/network',
-        'views':'@/views'*/
+module.exports = {
+  devServer: {
+    // 设置代理
+    proxy: {
+      "/": {
+        target: "http://127.0.0.1:8085/", // 访问数据的计算机域名
+        ws: true, // 是否启用websockets
+        changOrigin: true //开启代理
       }
     }
-  },
-   /* devServer: {
-      port: 8100, // 端口号
-    }*/
-
-
-    devServer: {
-      proxy: {
-        '/api': {
-          target: 'http://localhost:8082',
-          changeOrigin: true,
-          ws: true,
-          pathRewrite: {
-            '^/api': ''
-          }
-        }
-      }
-
-    }
-}
+  }
+};
