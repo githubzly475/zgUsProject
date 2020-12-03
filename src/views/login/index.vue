@@ -93,8 +93,8 @@ export default {
     return {
       // TODO
       loginForm: {
-        username: '',
-        password: '',
+        username: 'admin',
+        password: '1',
         code: '',
         token: '',
         t: ''
@@ -124,7 +124,7 @@ export default {
       this.loginForm.code = ''
       this.loginForm.t = new Date().getTime()
       // this.loginForm.src = process.env.BASE_API + '/captcha.jpg?t=' + this.loginForm.t
-      this.src = '/captcha.jpg?t=' + this.loginForm.t
+      // this.src = '/captcha.jpg?t=' + this.loginForm.t
     },
     handleLogin() {
       let that = this

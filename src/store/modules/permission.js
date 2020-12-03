@@ -56,7 +56,9 @@ function filterAsyncRouter(asyncRouterMap) {
 }
 
 export const loadView = (view) => { // 路由懒加载
-  return () => import(`@/views/${view}`)
+  // return () => import(`@/views/${view}/index`)
+  return (resolve) => require([`@/views/${view}`], resolve)
+
 }
 
 export default {
