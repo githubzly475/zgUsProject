@@ -133,12 +133,6 @@ export default {
           that.loading = true
           that.$store.dispatch('user/login', this.loginForm).then((res) => {
             that.$router.push({ path: that.redirect || '/' })
-            setTimeout(() => {
-              Notification.success({
-                title: '欢迎',
-                message: `${timeFix()}，欢迎回来`
-              })
-            }, 1000)
             that.loading = false
           }).catch(() => {
             that.loading = false
