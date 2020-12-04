@@ -11,7 +11,7 @@ import { getToken } from '@/utils/auth'
       baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
       //baseURL: 'https://localhost:8082',
       // withCredentials: true, // send cookies when cross-domain requests
-      timeout: 5000 // request timeout
+      timeout: 8000 // request timeout
     }
   )
 
@@ -23,7 +23,7 @@ instance.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      config.headers['Authorization'] = getToken()
     }
     return config
   },

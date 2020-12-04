@@ -17,6 +17,19 @@ const routes = [
     name: 'home',
     component: Home
   },
+
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '首页', icon: 'dashboard' }
+    }]
+  }
+  /*,
   {
     path: '/',
     component: Layout,
@@ -27,7 +40,7 @@ const routes = [
       component: () => import('@/views/Home.vue'),
       meta: { title: 'Home', icon: '' }
     }]
-  }
+  }*/
 ]
 
 const router = new VueRouter({

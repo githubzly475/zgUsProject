@@ -19,8 +19,9 @@
 
 <script>
     import Home from '@/views/Home.vue'
-
     import {login} from '@/customeraxios/login.js'
+    import {setToken} from '@/utils/auth.js'
+
     export default {
         name: "Log",
         data(){
@@ -29,6 +30,7 @@
                    username:'',
                    password:''
                }
+
            }
         },
         components:{
@@ -41,7 +43,8 @@
             submit(){
                 console.log(this.formData)
                 login(this.formData).then(res=>{
-
+                  console.log(res)
+                    setToken(res.data.tokenValue)
                     this.$router.push('/home')
                 }).catch(error=>{
 
