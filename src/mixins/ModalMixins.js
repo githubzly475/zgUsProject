@@ -45,10 +45,10 @@ export const ModalMixins = {
           }
           obj.then((res) => {
             if (res.code===200) {
-              that.$message.success(res.message)
+              that.$message.success(res.msg || '操作成功！')
               that.$emit('ok')
             } else {
-              that.$message.warning(res.message)
+              that.$message.warning(res.msg || '操作失败！')
             }
           }).finally(() => {
             that.confirmLoading = false

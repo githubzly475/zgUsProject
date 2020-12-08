@@ -4,10 +4,10 @@
     <div class="search-container">
       <el-form :inline="true" ref="searchForm" :model="queryParam" label-width="80px" label-position="left">
         <el-form-item label="字典名称">
-          <el-input v-model="queryParam.name" size="medium" placeholder="请输入字典名称"></el-input>
+          <el-input v-model="queryParam.keyName" size="medium" placeholder="请输入字典名称"></el-input>
         </el-form-item>
         <el-form-item label="字典编码">
-          <el-input v-model="queryParam.code" size="medium" placeholder="请输入字典编码"></el-input>
+          <el-input v-model="queryParam.keyCode" size="medium" placeholder="请输入字典编码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" icon="el-icon-search" size="medium" @click="searchQuery">搜索</el-button>
@@ -111,8 +111,8 @@
             <el-divider direction="vertical"></el-divider>
             <el-popconfirm
               placement="top"
-              @onConfirm="handleDelete(scope.$index)"
-              @onCancel="handleDeleteCancel"
+              @confirm="handleDelete(scope.row.id)"
+              @cancel="handleDeleteCancel"
               title="是否删除此条数据？">
               <el-button
                 type="text"
@@ -176,5 +176,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+.display-inline-div{
+  display: inline-block;
+}
 </style>

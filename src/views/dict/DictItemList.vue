@@ -10,10 +10,10 @@
       <div class="search-container">
         <el-form :inline="true" ref="searchForm" :model="queryParam" label-width="60px" label-position="left">
           <el-form-item label="名称">
-            <el-input v-model="queryParam.name" size="medium" class="width-50" placeholder="请输入名称"></el-input>
+            <el-input v-model="queryParam.valueName" size="medium" class="width-50" placeholder="请输入名称"></el-input>
           </el-form-item>
           <el-form-item label="数据值">
-            <el-input v-model="queryParam.code" size="medium" class="width-50" placeholder="请输入数据值"></el-input>
+            <el-input v-model="queryParam.valueCode" size="medium" class="width-50" placeholder="请输入数据值"></el-input>
           </el-form-item>
           <!--<template v-if="toggleSearchStatus">-->
           <!--<el-form-item label="字典名称A">-->
@@ -37,7 +37,7 @@
 
       <!-- top operations -->
       <div class="filter-container">
-        <el-button class="filter-item" type="primary" icon="el-icon-plus" size="medium" @click="handleAdd">新增</el-button>
+        <el-button class="filter-item" type="primary" icon="el-icon-plus" size="medium" @click="handleAddCustom">新增</el-button>
       </div>
 
       <!-- table -->
@@ -48,7 +48,7 @@
         :data="tableData"
         highlight-current-row
         tooltip-effect="dark"
-        max-height="340"
+        max-height="640"
         style="width: 100%;">
         <el-table-column
           align="center"
@@ -154,7 +154,6 @@
     methods: {
       getKeyId(id,arg){
         if(id){
-          // console.log('id',id)
           this.keyId = id
           this.queryParam.keyId = id
           this.loadData(arg)
@@ -181,17 +180,24 @@
               that.tableData = res.data;
               that.pageParam.total = res.data.length;
             } else {
-              that.$message.warning(res.message)
+              that.$message.warning(res.msg)
             }
             that.loading = false
           })
         }
       },
+      handleAddCustom(){
+        this.$refs.modalForm.add()
+        this.$refs.modalForm.title = "新增"
+        this.$refs.modalForm.disableSubmit = false
+        this.$refs.modalForm.getValueKeyId(this.keyId);
+
+      }
     }
   }
 </script>
 
-<style scoped>
+<style>
   .app-container{
     width: 90%;
     margin: 0 auto;
@@ -203,7 +209,12 @@
   .width-50{
     width: 150px;
   }
-
-
+  .display-inline-div {
+    display: inline-block;
+  }
+  .el-drawer__header span:focus {
+    outline: 0 !important;
+    font-weight: bolder;
+  }
 </style>
 

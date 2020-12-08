@@ -62,7 +62,7 @@ export const ListMixins = {
           that.tableData = res.data
           that.pageParam.total = res.data.length
         } else {
-          that.$message.warning(res.message)
+          that.$message.warning(res.msg)
         }
         that.loading = false
       })
@@ -109,9 +109,9 @@ export const ListMixins = {
         that.$message.warning('请至少选择一条记录！')
         return
       } else {
-        let ids = ""
+        let ids = []
         for (let a = 0; a < this.multipleSelection.length; a++) {
-          ids += this.multipleSelection[a].id + ","
+          ids.push(this.multipleSelection[a].id)
         }
         that.$confirm('是否删除选中数据?', '提示', {
           confirmButtonText: '确定',
@@ -120,13 +120,13 @@ export const ListMixins = {
         })
           .then(()=>{
             that.loading = true
-            deleteAction(that.url.deleteBatch, {ids: ids}).then((res) => {
+            deleteAction(that.url.deleteBatch, {ids: ids.join(",")}).then((res) => {
               if (res.code === 200) {
-                that.$message.success(res.message)
+                that.$message.success(res.msg)
                 that.loadData()
                 that.clearMultipleSelection()
               } else {
-                that.$message.warning(res.message)
+                that.$message.warning(res.msg)
               }
             }).finally(() => {
               that.loading = false
@@ -148,10 +148,10 @@ export const ListMixins = {
       }
       deleteAction(that.url.delete, {id: id}).then((res) => {
         if (res.code === 200) {
-          that.$message.success(res.message)
+          that.$message.success(res.msg)
           that.loadData()
         } else {
-          that.$message.warning(res.message)
+          that.$message.warning(res.msg)
         }
       });
     },
