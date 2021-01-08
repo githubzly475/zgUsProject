@@ -1,22 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Log from '@/views/Log'
+
 const Home=() => import('@/views/Home.vue')
 const Layout=()=>import('@/layout')
 Vue.use(VueRouter)
 
-const routes = [
+ export  const constantRoutes = [
+
+   {
+     path: '/redirect',
+     component: Layout,
+     hidden: true,
+     children: [
+       {
+         path: '/redirect/:path*',
+         component: () => import('@/views/redirect/index')
+       }
+     ]
+   },
   {
-    path: '/',
-    name: 'Log',
-    component: Log
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
   },
-  {
-    path: '/home',
-    name: 'home',
-    component: Home
-  },
+
 
   {
     path: '/',
@@ -29,24 +37,26 @@ const routes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   }
-  /*,
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/home',
-    children: [{
-      path: 'home',
-      name: 'home',
-      component: () => import('@/views/Home.vue'),
-      meta: { title: 'Home', icon: '' }
-    }]
-  }*/
+
 ]
 
-const router = new VueRouter({
-  mode: 'history',
+const createRouter = () => new VueRouter({
+  // mode: 'history',
   //base: process.env.BASE_URL,
-  routes
+  routes: constantRoutes
 })
+
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
+/*const router = new VueRouter({
+  mode: 'history',
+  routes
+})*/
 
 export default router

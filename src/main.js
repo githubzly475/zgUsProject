@@ -7,9 +7,20 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.scss'
 
+import '@/icons'
+import '@/permission' // permission control
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.config.devtools = false;
+
+import { Message } from '@/utils/message'
+Vue.prototype.$msg = Message
+
+
+import { hasBtnPermission } from './utils/permission'
+Vue.prototype.hasPerm = hasBtnPermission
+
 new Vue({
   router,
   store,

@@ -1,5 +1,6 @@
 import { asyncRoutes, constantRoutes } from '@/router'
-
+import { getRouters } from '@/customeraxios/leftMenu'
+import Layout from '@/layout/index'
 const state = {
   routes: [],
   addRoutes: [],
@@ -24,6 +25,7 @@ const actions = {
   generateRoutes({ commit }) {
     return new Promise(resolve => {
       getRouters().then(res =>{
+        console.log(res)
         const accessedRoutes = filterAsyncRouter(res.data.menuRouters)
         const buttonPerms = res.data.buttonPerms
         accessedRoutes.push(notFoundRouter)
@@ -53,10 +55,15 @@ function filterAsyncRouter(asyncRouterMap) {
   })
 }
 
-export const loadView = (view) => { // 路由懒加载
+/*错误原因是老外修改了webpack打包逻辑，webpack4中动态import不支持变量方式，
+该修改对于生产环境无影响，只在开发环境有问题*/
+/*export const loadView = (view) => { // 路由懒加载
   return () => import(`@/views/${view}`)
-}
+}*/
+export const loadView = (view) => { // 路由懒加载
 
+  return (resolve) => require([`@/views/${view}`], resolve)
+}
 export default {
   namespaced: true,
   state,

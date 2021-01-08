@@ -3,7 +3,7 @@ module.exports={
   configureWebpack:{
     resolve:{
       alias:{
-        // '@': resolve('src')
+         //'@': resolve('src')
       /*  'assets':'@/assets',
         'common':'@/common',
         'components':'@/components',
@@ -17,7 +17,7 @@ module.exports={
     }*/
 
 
-    devServer: {
+  /*  devServer: {
       proxy: {
         '/api': {
           target: 'http://localhost:8085',
@@ -29,5 +29,17 @@ module.exports={
         }
       }
 
+    }*/
+
+  devServer: {
+    proxy: {
+      '/': {
+        target: 'http://localhost:8085',
+        changeOrigin: true,
+        ws: true
+      }
     }
+
+  },
+
 }
